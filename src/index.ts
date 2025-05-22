@@ -1,11 +1,11 @@
-interface IUser {
+interface Users {
   id: string;
   name: string;
   email: string;
-  tasks: ITask[];
+  tasks: Tasks[];
 }
 
-interface ITask {
+interface Tasks {
   id: string;
   title: string;
   description: string;
@@ -21,7 +21,7 @@ enum TaskStatus {
 }
 
 
-class User implements IUser {
+class User implements Users {
   id: string;
   name: string;
   email: string;
@@ -34,7 +34,7 @@ class User implements IUser {
   }
 }
 
-class Task implements ITask {
+class Task implements Tasks {
   id: string;
   title: string;
   description: string;
@@ -76,7 +76,7 @@ class UserRepository {
     return Array.from(this.users.values());
   }
 
-  updateUser(id: string, userData: Partial<IUser>): User {
+  updateUser(id: string, userData: Partial<Users>): User {
     const user = this.getUserById(id);
     if (!user) {
       throw new Error(`User with ID ${id} not found.`);
@@ -112,7 +112,7 @@ class TaskRepository {
     return Array.from(this.tasks.values());
   }
 
-  updateTask(id: string, taskData: Partial<ITask>): Task {
+  updateTask(id: string, taskData: Partial<Tasks>): Task {
     const task = this.getTaskById(id);
     if (!task) {
       throw new Error(`Task with ID ${id} not found.`);
@@ -162,7 +162,7 @@ class UserService {
     return this.userRepository.getAllUsers();
   }
 
-  updateUser(id: string, userData: Partial<IUser>): User {
+  updateUser(id: string, userData: Partial<Users>): User {
     return this.userRepository.updateUser(id, userData);
   }
 
@@ -202,7 +202,7 @@ class TaskService {
     return this.taskRepository.getAllTasks();
   }
 
-  updateTask(id: string, taskData: Partial<ITask>): Task {
+  updateTask(id: string, taskData: Partial<Tasks>): Task {
     return this.taskRepository.updateTask(id, taskData);
   }
 
@@ -264,7 +264,7 @@ class TaskManagementSystem {
     this.taskService = new TaskService(taskRepository, userRepository);
   }
 
-  //User Management
+  
   createUser(name: string, email: string): User {
     return this.userService.createUser(name, email);
   }
@@ -277,7 +277,7 @@ class TaskManagementSystem {
     return this.userService.getAllUsers();
   }
 
-  updateUser(id: string, userData: Partial<IUser>): User {
+  updateUser(id: string, userData: Partial<Users>): User {
     return this.userService.updateUser(id, userData);
   }
 
@@ -286,7 +286,7 @@ class TaskManagementSystem {
   }
 
 
-  //Management of tasks
+
   createTask(title: string, description: string, status?: TaskStatus, dueDate?: Date): Task {
     return this.taskService.createTask(title, description, status, dueDate);
   }
@@ -299,7 +299,7 @@ class TaskManagementSystem {
     return this.taskService.getAllTasks();
   }
 
-  updateTask(id: string, taskData: Partial<ITask>): Task {
+  updateTask(id: string, taskData: Partial<Tasks>): Task {
     return this.taskService.updateTask(id, taskData);
   }
 
@@ -307,7 +307,7 @@ class TaskManagementSystem {
     return this.taskService.deleteTask(id);
   }
 
-  // Assignmnet of tasks
+
   assignTaskToUser(taskId: string, userId: string): Task {
     return this.taskService.assignTaskToUser(taskId, userId);
   }
@@ -322,57 +322,100 @@ class TaskManagementSystem {
 }
 
 
-// Instances of the Management System
-const taskManager = new TaskManagementSystem();
+const taskMangr = new TaskManagementSystem();
 
-// Create user Joyce and Jane
+
 console.log("Creating users...");
-const user1 = taskManager.createUser("Joyce", "joyce@example.com");
-const user2 = taskManager.createUser("Jane", "jane@example.com");
-console.log("Users created:", taskManager.getAllUsers());
+// const user1 = taskMangr.createUser("Joyce", "joyce@example.com");
+// const user2 = taskMangr.createUser("Creg", "creg@example.com");
 
-// Create tasks
+//new test instance for presentation
+const user3 = taskMangr.createUser("Melissa", "mellisawanja254@gmail.com");
+const user4 = taskMangr.createUser("Tracy", "tracy@yopmail.com")
+console.log("Users created:", taskMangr.getAllUsers());
+
 console.log("\nCreating tasks...");
-const task1 = taskManager.createTask(
-  "Implement Login", 
-  "Create a login form with validation",
+// const task1 = taskMangr.createTask(
+//   "Implement Login", 
+//   "Create a login form with validation",
+//   TaskStatus.TODO,
+//   new Date(2023, 11, 31)
+// );
+// const task2 = taskMangr.createTask(
+//   "Design Database", 
+//   "Design the database schema for the application"
+// );
+
+//new test instance for resentation
+const task3 = taskMangr.createTask(
+  "Implementation of a management system",
+  "Help integrate the new management system into the existing application",
   TaskStatus.TODO,
   new Date(2023, 11, 31)
-);
-const task2 = taskManager.createTask(
-  "Design Database", 
-  "Design the database schema for the application"
-);
-console.log("Tasks created:", taskManager.getAllTasks());
+)
+console.log("Tasks created:", taskMangr.getAllTasks());
 
 // Assign tasks to the users
 console.log("\nAssigning tasks to users...");
-taskManager.assignTaskToUser(task1.id, user1.id);
-taskManager.assignTaskToUser(task2.id, user2.id);
+// taskMangr.assignTaskToUser(task1.id, user1.id);
+// taskMangr.assignTaskToUser(task2.id, user2.id);
+
+//new test instance for presentation
+taskMangr.assignTaskToUser(task3.id, user3.id);
 
 // Get tasks for a specific user
-console.log("\nTasks for user:", user1.name);
-console.log(taskManager.getUserTasks(user1.id));
+// console.log("\nTasks for user:", user1.name);
+// console.log(taskMangr.getUserTasks(user1.id));
+
+//new test instance for presentation
+console.log("\nTasks for user 3:", user3.name);
+console.log(taskMangr.getUserTasks(user3.id));
+
+
 
 // Update a task
 console.log("\nUpdating task...");
-const updatedTask = taskManager.updateTask(task1.id, { 
-  status: TaskStatus.IN_PROGRESS,
-  description: "Create a login form with validation and error handling"
+// const updatedTask = taskMangr.updateTask(task1.id, { 
+//   status: TaskStatus.IN_PROGRESS,
+//   description: "Create a login form with validation and error handling"
+// });
+// console.log("Updated task:", updatedTask);
+
+//new test instance for presentation
+
+const updatedTask3 = taskMangr.updateTask(task3.id, {
+  status:TaskStatus.IN_PROGRESS,
+  description: "Also includes training of the end-users"
 });
-console.log("Updated task:", updatedTask);
+
+console.log("Updated task:", updatedTask3);
 
 // Unassign a task
 console.log("\nUnassigning task...");
-taskManager.unassignTask(task1.id);
-console.log("Tasks for user after unassignment:", taskManager.getUserTasks(user1.id));
+// taskMangr.unassignTask(task1.id);
+// console.log("Tasks for user after unassignment:", taskManager.getUserTasks(user1.id));
 
-// Delete a user
+//new test instance for presentation
+taskMangr.unassignTask(task3.id);
+console.log("Tasks for Mellisa after unassignment: ", taskMangr.getUserTasks(user3.id));
+
+
+// // Delete a user
 console.log("\nDeleting user...");
-taskManager.deleteUser(user2.id);
-console.log("Users after deletion:", taskManager.getAllUsers());
+// taskMangr.deleteUser(user2.id);
+// console.log("Users after deletion:", taskManager.getAllUsers());
 
-// Delete a task
+//new test instance for presentation
+taskMangr.deleteUser(user3.id);
+console.log("Users after deletion:", taskMangr.getAllUsers());
+
+
+// // Delete a task
 console.log("\nDeleting task...");
-taskManager.deleteTask(task2.id);
-console.log("Tasks after deletion:", taskManager.getAllTasks());
+// taskMangr.deleteTask(task2.id);
+// console.log("Tasks after deletion:", taskManager.getAllTasks());
+
+//new test instance for presentation
+taskMangr.deleteTask(task3.id);
+console.log("Tasks after deletion:", taskMangr.getAllTasks());
+
