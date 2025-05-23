@@ -1,13 +1,13 @@
-Task Management System
+### Task Management System
 
-Features.
+### Features.
 User Management : Create View, Edit and Delete user/users
 Task Management : Create View Edit and Delete task/tasks
 Navigation between user, tasks and assignments
 Responsive designs
 
 
-SCREENSHOTS
+### SCREENSHOTS
 
 div align="center">
 
@@ -24,7 +24,7 @@ div align="center">
 
 ![User Management Interface](./images/user_updated.png)
 
-![User Management Interface](./images/tracy_updated.png)
+![User Management Interface](./images/user_updated.png)
 
 ### Delete a user
 
@@ -59,7 +59,7 @@ div align="center">
 
 ![Task Management Interface](./images/task_before_unass.png)
 
-![Task Management Interface](./images/task_after_unass.png)
+![Task Management Interface](./images/task_after_unaass.png)
 
 
 </div>
