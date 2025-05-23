@@ -1,10 +1,10 @@
 ### Task Management System
 
 ### Features.
-User Management : Create View, Edit and Delete user/users
-Task Management : Create View Edit and Delete task/tasks
-Navigation between user, tasks and assignments
-Responsive designs
+User Management : Create View, Edit and Delete user/users \n
+Task Management : Create View Edit and Delete task/tasks \n
+Navigation between user, tasks and assignments \n
+Responsive designs \n
 
 
 ### SCREENSHOTS
