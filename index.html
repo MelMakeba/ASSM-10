@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Management System</h1>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="user-section">Users</button>
+            <button class="tab-btn" data-tab="task-section">Tasks</button>
+            <button class="tab-btn" data-tab="assignment-section">Assignments</button>
+        </div>
+           
+        <main>
+            <div class="section" id="user-section">
+                <h2>Users</h2>
+                <div class="form-container">
+                    <input type="hidden" id="editing-user-id">
+                    <label for="user-name">Name</label>
+                    <input type="text" id="user-name" placeholder="Enter User's name">
+                    <label for="user-email">Email</label>
+                    <input type="email" id="user-email" placeholder="Enter User's email">
+                    <button id="add-user-btn">Add User</button>
+                    <button id="cancel-edit-user-btn" style="display:none">Cancel</button>
+                </div>
+                <div class="list-container">
+                    <div class="list-header">
+                        <h3>User List</h3>
+                        <button class="toggle-btn" data-target="users-list">Show/Hide</button>
+                    </div>
+                    <div id="users-list" class="list"></div>
+                </div>
+            </div>
+            
+            <div class="section" id="task-section">
+                <h2>Tasks</h2>
+                <div class="form-container">
+                    <input type="hidden" id="editing-task-id">
+                    <input type="text" id="task-title" placeholder="Title">
+                    <textarea id="task-description" placeholder="Description"></textarea>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-status">Status:</label>
+                            <select id="task-status">
+                                <option value="TODO">To Do</option>
+                                <option value="IN_PROGRESS">In Progress</option>
+                                <option value="COMPLETED">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-due-date">Due Date:</label>
+                            <input type="date" id="task-due-date">
+                        </div>
+                    </div>
+                    <button id="add-task-btn">Add Task</button>
+                    <button id="cancel-edit-task-btn" style="display:none">Cancel</button>
+                </div>
+                <div class="list-container">
+                    <div class="list-header">
+                        <h3>Task List</h3>
+                        <button class="toggle-btn" data-target="tasks-list">Show/Hide</button>
+                    </div>
+                    <div id="tasks-list" class="list"></div>
+                </div>
+            </div>
+            
+            <div class="section" id="assignment-section">
+                <h2>Assign Tasks</h2>
+                <div class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-select">Task:</label>
+                            <select id="task-select">
+                                <option value="">Select a task</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-select">User:</label>
+                            <select id="user-select">
+                                <option value="">Select a user</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="assign-btn">Assign Task</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-tasks-select">View tasks for:</label>
+                        <select id="user-tasks-select">
+                            <option value="">Select a user</option>
+                        </select>
+                    </div>
+                    <button id="view-tasks-btn">View Tasks</button>
+                </div>
+                <div class="list-container">
+                    <div class="list-header">
+                        <h3>User Tasks</h3>
+                        <button class="toggle-btn" data-target="user-tasks-list">Show/Hide</button>
+                    </div>
+                    <div id="user-tasks-list" class="list"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div id="user-edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Edit User</h2>
+            <input type="hidden" id="edit-user-id">
+            <div class="form-group">
+                <label for="edit-user-name">Name</label>
+                <input type="text" id="edit-user-name">
+            </div>
+            <div class="form-group">
+                <label for="edit-user-email">Email</label>
+                <input type="email" id="edit-user-email">
+            </div>
+            <button id="save-user-btn">Save Changes</button>
+        </div>
+    </div>
+
+    <div id="task-edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Edit Task</h2>
+            <input type="hidden" id="edit-task-id">
+            <div class="form-group">
+                <label for="edit-task-title">Title</label>
+                <input type="text" id="edit-task-title">
+            </div>
+            <div class="form-group">
+                <label for="edit-task-description">Description</label>
+                <textarea id="edit-task-description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="edit-task-status">Status</label>
+                <select id="edit-task-status">
+                    <option value="TODO">To Do</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="COMPLETED">Completed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="edit-task-due-date">Due Date</label>
+                <input type="date" id="edit-task-due-date">
+            </div>
+            <button id="save-task-btn">Save Changes</button>
+        </div>
+    </div>
+
+    <script src="dist/index.js"></script>
+</body>
+</html>
